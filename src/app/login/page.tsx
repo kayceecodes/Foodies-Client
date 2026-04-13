@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import LoginForm from './Form';
-import Loader from '../components/ui/loader/Loader';
+import Loader from '@/components/ui/loader/Loader';
 import { boolean } from 'yup';
 
 

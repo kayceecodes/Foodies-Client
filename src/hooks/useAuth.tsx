@@ -5,7 +5,7 @@ import React, {
   ReactNode,
   JSX
 } from 'react';
-import { User, AuthContextType, LoginRequest, SignupRequest, AuthSuccessResponse } from '../../types/auth';
+import { User, AuthContextType, LoginRequest, SignupRequest, AuthSuccessResponse } from '../types/auth';
 import {
   useCurrentUserQuery,
   useLoginMutation,
@@ -40,12 +40,12 @@ export function AuthProvider({children}: AuthProviderProps): JSX.Element {
     };
 
     const value: AuthContextType = {
-        user: user ?? null, // ensure user is never undefined
+        user: user ?? null,                                  
         loading,
         login,
         signup,
         logout,
-        isAuthenticated: !!user, // explicitly check if user exists
+        isAuthenticated: !!user,                                   
     }
 
     return (

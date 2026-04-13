@@ -1,6 +1,6 @@
 // hooks/useAuthQueries.ts - USE AUTH FUNCTIONS
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { loginUser, signupUser, logoutUser, getCurrentUser } from '../../utils/auth';
+import { loginUser, signupUser, logoutUser, getCurrentUser } from '@/utils/auth';
 
 export const AUTH_QUERY_KEYS = {
   currentUser: ['currentUser'] as const,

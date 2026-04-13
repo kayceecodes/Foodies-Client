@@ -1,16 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
-import { Formik, Form, Field, ErrorMessage, FormikHelpers } from "formik";
+import { useState } from "react";
+import { Formik, Form, FormikHelpers } from "formik";
 import { useRouter } from "next/navigation";
-import Loader from "../components/ui/loader/Loader";
 import ValidationSchema from "./validationSchema";
-import { SignupRequest } from "../../../types/auth";
+import { SignupRequest } from "@/types/auth";
 import { useAuth } from "../../hooks/useAuth";
 import FormikTextField from "../login/FormikTextField";
 import Button from "@mui/material/Button";
-import Checkbox from "@mui/material/Checkbox";
-import { Alert, FormControlLabel } from "@mui/material";
+import { Alert } from "@mui/material";
 import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import Link from "next/link";
 

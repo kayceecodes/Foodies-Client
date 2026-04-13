@@ -1,10 +1,9 @@
-// Component using the hook
 'use client'
 
 import { useState, useEffect } from 'react';
 import AsyncSelect from 'react-select/async';
 import { useDebounce } from '@/hooks/useDebounce';
-import { API_BASE_URL } from '../../../../constants/api';
+import { API_URL } from '@/lib/config';
 import { StylesConfig } from 'react-select';
 
 
@@ -50,7 +49,7 @@ export default function RestaurantSearch() {
 
         async function fetchRestaurants() {
             try {
-            const response = await fetch(API_BASE_URL + `/api/businesses/search?q=${debouncedInput}`);
+            const response = await fetch(API_URL + `/api/businesses/search?q=${debouncedInput}`);
                 const data = await response.json();
                 setOptions(data.results);
             } catch (error) {

@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../constants/api";
+import { API_URL } from "@/lib/config";
 
 export interface ApiResponse<T> {
   data: T;
@@ -28,8 +28,7 @@ export async function fetchApi<T>(
     options: RequestInit
 ): Promise<ApiResponse<T>>
 {
-    const url = `${API_BASE_URL}${endpoint}`;
-    
+   const url = `${API_URL}${endpoint}`; 
     const config: RequestInit = {
         credentials: 'include',
         headers: {

@@ -2,11 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation"
-import { checkAuthentication } from "../../../../utils/auth";
 import { useState, useEffect, useRef } from "react";
-import { useAuth } from "../../../hooks/useAuth";
+import { useAuth } from "@/hooks/useAuth";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons';
+import Image from 'next/image';
 
 export default function Navbar () {
     const pathname = usePathname();
@@ -15,10 +15,6 @@ export default function Navbar () {
     const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);
     const dropdownRef = useRef<HTMLDivElement>(null); 
    
-    useEffect(() => {
-        setIsLoggedIn(isAuthenticated);
-    }, [isAuthenticated])
-
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node))
@@ -34,17 +30,20 @@ export default function Navbar () {
     }, [isDropdownOpen]);
  
     const AccountLinksList =
-        <div className="absolute py-2 px-4 top-8 right-0 min-w-32 border-stone-700 border-[0.9px] bg-neutral-800 rounded-md border">
-            <Link className="py-2 text-sm block" href="/dashboard">
+        <div className="flex flex-col min-h-[120px] justify-between absolute py-3 px-4 top-8 right-0 min-w-32 border-stone-700 border-[0.9px] bg-neutral-800 rounded-md border">
+            <Link className="text-sm block" href="/dashboard">
                 Dashboard
             </Link>
-            <Link className="py-2 text-sm" onClick={() => { 
+            <Link className="text-sm" onClick={() => { 
                 logout();
             }} 
-            href="/"> <div>Logout</div> 
+            href="/"> <div className="text-sm block">Logout</div> 
             </Link>
-            <Link className="py-2 text-sm block" href="/switch-users">
+            <Link className="text-sm block" href="/switch-users">
                 Switch User
+            </Link>
+            <Link className="text-sm block" href="/switch-users">
+                Add New User 
             </Link>
         </div> 
 
@@ -52,7 +51,6 @@ export default function Navbar () {
         setIsDropdownOpen(prev => !prev)
 
     const accountLinksList = 
-        isLoggedIn ?  
         <div 
         className="relative flex-0 mr-2 z-1 md:mr-3 cursor-pointer"
             onClick={toggleDropdownOpen}
@@ -62,27 +60,31 @@ export default function Navbar () {
                 <FontAwesomeIcon icon={faUser} />
                 {isDropdownOpen ? AccountLinksList : null}
             </div>
-        </div>
-        : null; 
+        </div>;
+         
     
     return (
-        <nav className="flex w-full justify-between bg-glass border-b-stone-700 border-b-[0.9px] bg-neutral-800 py-2">
-            <div className="flex-1">
-
-            </div>
+        <nav className="flex w-full items-center justify-between bg-glass border-b-stone-700 border-b-[0.9px] bg-neutral-800 py-2">
+                <Link className="flex-1 pt-0.5 ml-5 text-md" href="/">
+                    <div className="">
+                        <Image width={30} height={30} src="/images/FoodiesLogo2.png" alt={"Foodies Logo"} />
+                    </div>
+                </Link>
             <div className="flex flex-1 justify-end">
                 {/* <Link className="flex-0 mr-5" href="/map">
                     <i className="fa-solid fa-magnifying-glass"></i>
                     <FontAwesomeIcon icon={faSearch} />
                 </Link>  */}
-                {isLoggedIn ? null :
-                    <Link className="grow-0 w-fit pt-0.5 mr-5 text-md" href="/login">
-                        Login
-                    </Link>}
-                <Link className="grow-0 w-fit pt-0.5 mr-5 text-md" href="/sign-up">
-                    Sign up
-                </Link>
-                {accountLinksList}
+                {!isAuthenticated &&
+                    <>
+                        <Link className="grow-0 w-fit pt-0.5 mr-5 text-sm xl:text-lg" href="/login">
+                            Login
+                        </Link>
+                        <Link className="grow-0 w-fit pt-0.5 mr-5 text-sm xl:text-lg" href="/sign-up">
+                            Sign up
+                        </Link> 
+                    </>}
+                {isAuthenticated && accountLinksList}
             </div> 
         </nav>
     );

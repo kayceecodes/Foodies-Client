@@ -10,7 +10,7 @@ import * as Yup from "yup";
 import {
   AuthSuccessResponse,
   LoginRequest,
-} from "../../../types/auth";
+} from "@/types/auth";
 import { useAuth } from "../../hooks/useAuth";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
@@ -19,6 +19,8 @@ import FormikTextField from "./FormikTextField";
 import { LockOutline, MailOutlined } from "@mui/icons-material";
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import Alert from "@mui/material/Alert";
+import * as styles from './form.module.css';
+
 
 interface FormValues {
   email: string;
@@ -44,8 +46,6 @@ export default function LoginForm() {
     try {
       response = await login(values);
       if (response.success) {
-        //onSuccess?.();
-        // alert(JSON.stringify(values, null, 2));
         await new Promise((resolve) => setTimeout(resolve, 1000));
         router.push("/");
         return;
@@ -113,6 +113,7 @@ export default function LoginForm() {
                 variant="outlined"
               />
               <Button
+                className={styles.submitButton}
                 type="submit"
                 color="primary"
                 variant="contained"
