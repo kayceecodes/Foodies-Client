@@ -113,7 +113,6 @@ export default function LoginForm() {
                 variant="outlined"
               />
               <Button
-                className={styles.submitButton}
                 type="submit"
                 color="primary"
                 variant="contained"

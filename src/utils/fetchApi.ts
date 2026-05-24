@@ -33,7 +33,8 @@ export async function fetchApi<T>(
         credentials: 'include',
         headers: {
             ...options.headers,
-            ...defaultHeaders
+            ...defaultHeaders,
+            'ngrok-skip-browser-warning': 'true'
         },
         ...options
     }
