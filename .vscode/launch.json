@@ -1,0 +1,88 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Next.js: Full Stack (Turbopack)",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "/home/kaycee/.local/share/nvm/v25.0.0/bin/npm",
+      "runtimeArgs": ["run", "dev", "--", "--turbo"],
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"],
+      "serverReadyAction": {
+        "pattern": "- Local:.+(https?://.+)",
+        "uriFormat": "%s",
+        "action": "debugWithChrome"
+      },
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/src/**",
+        "${workspaceFolder}/utils/**",
+        "!**/node_modules/**"
+      ],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Next.js: Server-Side Only",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "/home/kaycee/.local/share/nvm/v25.0.0/bin/npm",
+      "runtimeArgs": ["run", "dev", "--", "--turbo"],
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/src/**",
+        "${workspaceFolder}/utils/**",
+        "!**/node_modules/**"
+      ],
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "Next.js: Client-Side Only",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:3000",
+      "runtimeExecutable": "/usr/bin/chromium",
+      "runtimeArgs": ["--new-window", "--remote-debugging-port=9222"],
+      "webRoot": "${workspaceFolder}",
+      "sourceMaps": true,
+      "sourceMapPathOverrides": {
+        "webpack://_N_E/*": "${webspaceFolder}/*",
+        "webpack://_N_E/./src/*": "${workspaceFolder}/src/*",
+        "webpack://_N_E/./utils/*": "${workspaceFolder}/utils/*",
+        "webpack:///./*": "${workspaceFolder}/*"
+      }
+    },
+    {
+      "name": "Next.js: Attach to Running Server",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/src/**",
+        "${workspaceFolder}/utils/**",
+        "!**/node_modules/**"
+      ],
+      "cwd": "${workspaceFolder}"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Next.js: Debug Full Stack (Server + Client)",
+      "configurations": [
+        "Next.js: Server-Side Only",
+        "Next.js: Client-Side Only"
+      ],
+      "stopAll": true,
+      "presentation": {
+        "hidden": false,
+        "group": "Full Stack",
+        "order": 1
+      }
+    }
+  ]
+}
+
